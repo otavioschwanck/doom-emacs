@@ -119,10 +119,21 @@
         "e" #'bundle-exec
         "o" #'bundle-open))
 
+(use-package! chruby
+  :when (featurep! +chruby)
+  :defer t
+  :hook
+  (enh-ruby-mode . chruby-use-corresponding)
+  (ruby-mode . chruby-use-corresponding)
+  )
+
 (after! rbenv
   (setq rspec-use-rvm nil)
   (add-to-list 'exec-path (expand-file-name "shims" rbenv-installation-dir)))
 
+(after! chruby
+  (setq rspec-use-rvm nil)
+  (setq rspec-use-chruby t))
 
 ;;
 ;;; Testing frameworks
